@@ -2,3 +2,6 @@ apiRules:
 - exclude:
     hasAttribute:
       uid: System.ObsoleteAttribute
+- exclude:
+    uidRegex: ^C_Sglx_namespace
+      
