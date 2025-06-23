@@ -26,7 +26,7 @@ namespace Bonsai.SpikeGLX
 
         /// <summary>
         /// Gets or sets the channels to output the digital signal to.
-        /// Strings have format "Dev6/port0/line2,Dev6/port0/line5\".
+        /// Strings have format \"Dev6/port0/line2,Dev6/port0/line5\".
         /// </summary>
         [Description("Channels to output the digital signal to. " +
             "Strings have format \"Dev6/port0/line2,Dev6/port0/line5\"")]

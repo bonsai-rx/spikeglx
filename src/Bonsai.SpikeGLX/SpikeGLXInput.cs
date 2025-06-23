@@ -11,14 +11,13 @@ namespace Bonsai.SpikeGLX
     /// <summary>
     /// Represents an operator that streams buffers of data from a SpikeGLX data stream.
     /// </summary>
-    [Obsolete("Replaced by SpikeGLXInput.")]
     [Description("Streams buffers of data from a SpikeGLX data stream.")]
     [Combinator(MethodName = nameof(Generate))]
     [WorkflowElementCategory(ElementCategory.Source)]
-    public class SpikeStream : Source<Mat>
+    public class SpikeGLXInput : Source<Mat>
     {
         /// <summary>
-        /// Gets or sets the duration of streamed data buffers, in ms.
+        /// Gets or sets the duration of fetched data buffers, in ms. 
         /// </summary>
         [Description("Duration of streamed data buffers, in ms.")]
         public int BufferLength { get; set; } = 1000;
@@ -26,7 +25,7 @@ namespace Bonsai.SpikeGLX
         /// <summary>
         /// Gets or sets the IP address of the SpikeGLX command server
         /// </summary>
-        [Description("IP address of the SpikeGLX command server." + 
+        [Description("IP address of the SpikeGLX command server." +
             "\"localhost\" evaluates to 127.0.0.1.")]
         public string Host { get; set; } = "localhost";
 
@@ -49,8 +48,13 @@ namespace Bonsai.SpikeGLX
         public int Substream { get; set; } = 0;
 
         /// <summary>
-        /// Gets or sets the array of channels to fetch data from.
+        /// Gets or sets the array of channels to fetch data from. 
         /// </summary>
+        /// <remarks>
+        /// Channels may be provided as an array of integers, or as comma separated ranges of 
+        /// channels with an optional step size, e.g. "0:10,20:5:100". These ranges include both
+        /// end points. 
+        /// </remarks>
         [Description("Array of channels to fetch data from.")]
         [TypeConverter(typeof(ChannelRangeTypeConverter))]
         public int[] Channels { get; set; } = { 0 };
@@ -69,9 +73,13 @@ namespace Bonsai.SpikeGLX
         public bool ConvertToVoltage { get; set; } = false;
 
         /// <summary>
-        /// Gets or sets the flag to use a high resolution timer (~1ms vs. ~15ms).
+        /// Gets or sets the flag to use a high resolution timer (resolution ~1ms vs. ~15ms).
         /// </summary>
-        [Description("Flag to use a high resolution timer (~1ms vs. ~15ms).")]
+        /// <remarks>
+        /// Using the high resolution timer allows streaming data at a higher rate, at the 
+        /// cost of more computational load due to increased polling of the SpikeGLX command server. 
+        /// </remarks>
+        [Description("Flag to use a high resolution timer (resolution ~1ms vs. ~15ms).")]
         public bool HighResolutionTimer { get; set; } = false;
 
         /// <summary>
@@ -101,7 +109,7 @@ namespace Bonsai.SpikeGLX
                     // the timer is set to its minimum possible value. Otherwise it is set to
                     // 15ms. 
                     using AutoResetEvent pollSignal = new(false);
-                    using PrecisionTimer pollTimer = new(); 
+                    using PrecisionTimer pollTimer = new();
                     int pollPeriod = (int)Math.Floor((double)BufferLength / 2);
                     pollTimer.SetInterval(() => pollSignal.Set(),
                         pollPeriod,
@@ -119,7 +127,7 @@ namespace Bonsai.SpikeGLX
                     {
                         while ((connection.GetStreamSampleCount() - tailCount) >= bufferSize)
                         {
-                            ulong headCount = connection.Fetch(out Mat data, tailCount, 
+                            ulong headCount = connection.Fetch(out Mat data, tailCount,
                                 (int)bufferSize, Downsample, ConvertToVoltage);
                             tailCount = headCount + bufferSize;
                             observer.OnNext(data);
@@ -135,7 +143,34 @@ namespace Bonsai.SpikeGLX
                 TaskScheduler.Default);
             })
             .PublishReconnectable()
-            .RefCount();            
+            .RefCount();
+        }
+
+        /// <summary>
+        /// Generates an observable sequence of buffers of data fetched from a SpikeGLX data stream.
+        /// </summary>
+        /// <typeparam name="TSource">The type of the input sequence.</typeparam>
+        /// <param name="source">Input sequence used to trigger fetching. A new buffer is fetched every time the input sequence emits a notification.</param>
+        /// <returns>A sequence of <see cref="Mat"/> objects representing buffers of fetched data from a SpikeGLX data stream.</returns>
+        public IObservable<Mat> Generate<TSource>(IObservable<TSource> source)
+        {
+            // Create a disposable data stream connection using the provided host, port, stream type, substream, and channels.
+            return Observable
+                .Using<Mat, SpikeGLXDataStream>(() => new SpikeGLXDataStream(Host, Port, StreamType, Substream, Channels),
+                    // Use the data stream connection to fetch the latest data for each input notification.
+                    connection => source
+                        .Select(input =>
+                        {
+                            // Calculate the maximum number of samples to fetch based on the buffer length and stream sample rate.
+                            int maxSamples = (int)(BufferLength * connection.GetStreamSampleRate() / 1000);
+                            // Fetch the latest data from the data stream, downsampling and converting to voltage as needed.
+                            connection.FetchLatest(out Mat data, maxSamples, Downsample, ConvertToVoltage);
+                            return data;
+                        }))
+                // Publish the observable sequence and reconnect if it is disconnected.
+                .PublishReconnectable()
+                // Reference count the observable sequence to manage its lifetime.
+                .RefCount();
         }
     }
 }

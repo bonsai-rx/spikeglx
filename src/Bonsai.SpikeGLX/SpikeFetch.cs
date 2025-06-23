@@ -11,6 +11,7 @@ namespace Bonsai.SpikeGLX
     /// Represents an operator that generates a sequence of the latest buffers of data
     /// from a SpikeGLX data stream.
     /// </summary>
+    [Obsolete("Replaced by SpikeGLXInput.")]
     [Description("Outputs the most recent buffer of data from SpikeGLX.")]
     [Combinator(MethodName = nameof(Generate))]
     [WorkflowElementCategory(ElementCategory.Source)]
@@ -58,7 +59,8 @@ namespace Bonsai.SpikeGLX
         /// Gets or sets the array of channels to fetch data from.
         /// </summary>
         [Description("Array of channels to fetch data from.")]
-        public int[] Channels { get; set; } = { 0 };
+        [TypeConverter(typeof(ChannelRangeTypeConverter))]
+        public int[] Channels { get; set; } = null;
 
         /// <summary>
         /// Gets or sets the factor by which fetched data is downsampled.

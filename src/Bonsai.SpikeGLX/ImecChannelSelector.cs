@@ -10,6 +10,7 @@ namespace Bonsai.SpikeGLX
     /// Represents an operator that automatically generates a an array of channel 
     /// indices for SpikeFetch or SpikeStream.
     /// </summary>
+    [Obsolete("Replaced by channel range parsing in SpikeGLXInput.")]
     [Description("Automatically generates an array of channel indices for " + 
         "SpikeFetch or SpikeStream.")]
     [Combinator(MethodName = nameof(Generate))]
@@ -63,9 +64,10 @@ namespace Bonsai.SpikeGLX
         /// <returns>The channels, represented as enumerable of integers.</returns>
         private static IEnumerable<int> ParseChannels(string channels)
         {
-            return channels.Split(',')
-                  .Select(x => x.Split(':'))
-                  .Select(p => new { 
+            // Parse the provided channels into a list.
+            return channels.Split(',')      
+                  .Select(x => x.Split(':'))                                         
+                  .Select(p => new {                                            
                       First = int.Parse(p.First()), 
                       Last = int.Parse(p.Last()),
                       Step = (p.Length == 3)? int.Parse(p.Skip(1).First()) : 1 
@@ -140,6 +142,7 @@ namespace Bonsai.SpikeGLX
     /// <summary>
     /// Represents the constant mux tables for each Neuropixels probe type
     /// </summary>
+    [Obsolete("Replaced by channel range parsing in SpikeGLXInput.")]
     public static class NeuropixelsMuxGroups
     {
         // Part numbers of neuropixels probes
