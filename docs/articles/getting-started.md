@@ -13,7 +13,7 @@
 
 A brief summary of the functionality of each of these operators is provided here. A more detailed description of each may be found on the associated Reference page.
 > [!NOTE]
-> All `Bonsai.SpikeGLX` operators require SpikeGLX's remote command server to be running. A full description of how to do this can be found in the [SpikeGLX User Manual](https://github.com/billkarsh/SpikeGLX/blob/master/Markdown/UserManual.md#remote-command-servers). Make sure to note the `Host` (IP Address) and `Port` the command server is listening on. These are properties that must be set for each `Bonsai.SpikeGLX` operator.
+> All `Bonsai.SpikeGLX` operators require SpikeGLX's remote command server to be running. A full description of how to do this can be found in the [SpikeGLX User Manual](https://billkarsh.github.io/SpikeGLX/Sgl_help/UserManual.html#remote-command-servers). Make sure to note the `Host` (IP Address) and `Port` the command server is listening on. These are properties that must be set for each `Bonsai.SpikeGLX` operator.
 
 ## Stream Data from SpikeGLX into Bonsai
 [!include[Fetch](~/articles/spikeglx-fetch.md)]
