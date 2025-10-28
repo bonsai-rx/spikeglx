@@ -14,7 +14,7 @@ namespace Bonsai.SpikeGLX
     [Description("Streams buffers of data from a SpikeGLX data stream.")]
     [Combinator(MethodName = nameof(Generate))]
     [WorkflowElementCategory(ElementCategory.Source)]
-    public class SpikeGLXInput : Source<Mat>
+    public class Fetch : Source<Mat>
     {
         /// <summary>
         /// Gets or sets the duration of fetched data buffers, in ms. 

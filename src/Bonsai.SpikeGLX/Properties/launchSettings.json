@@ -2,9 +2,8 @@
   "profiles": {
     "Bonsai": {
       "commandName": "Executable",
-      "executablePath": "C:\\Users\\oobad\\AppData\\Local\\Bonsai\\Bonsai.exe",
-      "commandLineArgs": "--lib:$(TargetDir).",
-      "remoteDebugEnabled": false
+      "executablePath": "$(registry:HKEY_CURRENT_USER\\Software\\Goncalo Lopes\\Bonsai@InstallDir)Bonsai.exe",
+      "commandLineArgs": "--lib:$(TargetDir)."
     }
   }
 }
