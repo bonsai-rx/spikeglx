@@ -13,7 +13,7 @@ namespace Bonsai.SpikeGLX
         " NOTE: Gate and/or trigger must be set to \"Remote Controlled Start and Stop\"" +
         " in SpikeGLX.")]
     [WorkflowElementCategory(ElementCategory.Sink)]
-    public class TriggerRecording
+    public class Trigger
     {
         /// <summary>
         /// Gets or sets the IP address of the SpikeGLX command server

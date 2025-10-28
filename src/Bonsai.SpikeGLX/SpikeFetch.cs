@@ -11,7 +11,7 @@ namespace Bonsai.SpikeGLX
     /// Represents an operator that generates a sequence of the latest buffers of data
     /// from a SpikeGLX data stream.
     /// </summary>
-    [Obsolete("Replaced by SpikeGLXInput.")]
+    [Obsolete("Replaced by Fetch.")]
     [Description("Outputs the most recent buffer of data from SpikeGLX.")]
     [Combinator(MethodName = nameof(Generate))]
     [WorkflowElementCategory(ElementCategory.Source)]

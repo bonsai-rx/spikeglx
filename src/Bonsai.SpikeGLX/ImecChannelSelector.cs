@@ -10,7 +10,7 @@ namespace Bonsai.SpikeGLX
     /// Represents an operator that automatically generates a an array of channel 
     /// indices for SpikeFetch or SpikeStream.
     /// </summary>
-    [Obsolete("Replaced by channel range parsing in SpikeGLXInput.")]
+    [Obsolete("Replaced by channel range parsing in Fetch.")]
     [Description("Automatically generates an array of channel indices for " + 
         "SpikeFetch or SpikeStream.")]
     [Combinator(MethodName = nameof(Generate))]
@@ -142,7 +142,7 @@ namespace Bonsai.SpikeGLX
     /// <summary>
     /// Represents the constant mux tables for each Neuropixels probe type
     /// </summary>
-    [Obsolete("Replaced by channel range parsing in SpikeGLXInput.")]
+    [Obsolete("Replaced by channel range parsing in Fetch.")]
     public static class NeuropixelsMuxGroups
     {
         // Part numbers of neuropixels probes
