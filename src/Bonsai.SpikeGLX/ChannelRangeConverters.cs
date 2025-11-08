@@ -6,7 +6,7 @@ using System.Linq;
 /// <summary>
 /// Provides a method for parsing a string representing a range of channels into an array of integers.
 /// </summary>
-public static class ChannelRangeParser
+internal static class ChannelRangeParser
 {
     /// <summary>
     /// Parses a string representing a range of channels into an array of integers.
@@ -48,7 +48,7 @@ public static class ChannelRangeParser
 /// <summary>
 /// Converts a string representation of a channel range to an array of integers.
 /// </summary>
-public class ChannelRangeTypeConverter : TypeConverter
+internal class ChannelRangeTypeConverter : TypeConverter
 {
     /// <summary>
     /// Determines if the type converter can convert from the specified source type.
