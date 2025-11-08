@@ -8,7 +8,7 @@ namespace Bonsai.SpikeGLX
     /// <summary>
     /// Represents an instance of SpikeGLX communicating with Bonsai.
     /// </summary>
-    public class SpikeGLX : IDisposable
+    internal class SpikeGLX : IDisposable
     {
         private bool disposed;  // Whether unmanaged resources have been disposed
         private readonly IntPtr hSglx;  // SpikeGLX connection handle

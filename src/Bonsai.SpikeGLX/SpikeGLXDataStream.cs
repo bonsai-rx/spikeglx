@@ -5,7 +5,7 @@ namespace Bonsai.SpikeGLX
     /// <summary>
     /// Represents an instance of a single SpikeGLX data stream being accessed from Bonsai.
     /// </summary>
-    public class SpikeGLXDataStream : SpikeGLX
+    internal class SpikeGLXDataStream : SpikeGLX
     {
         protected readonly int JS;              // Stream type (0: NIDAQ, 1: Onebox, 2: IMEC Probe).  
         protected readonly int IP;              // Substream (0 for NIDAQ, probe number for IMEC Probe).
