@@ -3,6 +3,8 @@ using System.ComponentModel;
 using System.Globalization;
 using System.Linq;
 
+namespace Bonsai.SpikeGLX;
+
 /// <summary>
 /// Provides a method for parsing a string representing a range of channels into an array of integers.
 /// </summary>
@@ -21,17 +23,11 @@ internal static class ChannelRangeParser
        .Select(x => x.Split(':'))
        // [["0", "5", "10"], ["1", "3"]] -> [[0, 10, 5], [0, 3, 1]]
        .Select(p => new {
-           /// <summary>
-           /// The first value in the range.
-           /// </summary>
+           // The first value in the range.
            First = int.Parse(p.First()),
-           /// <summary>
-           /// The last value in the range.
-           /// </summary>
+           // The last value in the range.
            Last = int.Parse(p.Last()),
-           /// <summary>
-           /// The step value in the range, or 1 if not specified.
-           /// </summary>
+           // The step value in the range, or 1 if not specified.
            Step = (p.Length == 3) ? int.Parse(p.Skip(1).First()) : 1
        })
        // [[0, 10, 5], [0, 3, 1]] -> [0, 5, 10, 0, 1, 2, 3]
