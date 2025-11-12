@@ -7,8 +7,8 @@
   </PropertyGroup>
 
 	<ItemGroup>
-    <Compile Include="$(ProjectDir)..\..\modules\SpikeGLX-CPP-SDK\C#\C_Sglx.cs" Link="C_Sglx.cs" />
-    <Content Include="$(ProjectDir)..\..\modules\SpikeGLX-CPP-SDK\API\*.dll" PackagePath="runtimes\win-x64\native">
+    <Compile Include="..\Externals\SpikeGLX-CPP-SDK\C#\C_Sglx.cs" Link="C_Sglx.cs" />
+    <Content Include="..\Externals\SpikeGLX-CPP-SDK\API\*.dll" PackagePath="runtimes\win-x64\native">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
