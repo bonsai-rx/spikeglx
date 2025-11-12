@@ -137,6 +137,10 @@ jobs:
       - name: Restore
         run: dotnet restore
 
+      # This is a workaround to allow running custom source generator task
+      - name: Generate source files
+        run: dotnet msbuild -target:CopySglxSourceFiles
+
       # ----------------------------------------------------------------------- Build metadata
       - name: Build metadata
         id: build-metadata
