@@ -2,54 +2,14 @@
 
   <PropertyGroup>
     <Title>Bonsai - SpikeGLX Library</Title>
-    <Description>Bonsai package for interfacing with SpikeGLX</Description>
-    <Authors>Jacob M. White</Authors>
-    <Copyright>Copyright ©  2023</Copyright>
-    <GeneratePackageOnBuild Condition="'$(Configuration)'=='Release'">true</GeneratePackageOnBuild>
-    <PackageProjectUrl>https://github.com/FeeLab/Bonsai.SpikeGLX</PackageProjectUrl>
-    <PackageIcon>Bonsai.SpikeGLX.Logo.png</PackageIcon>
-    <PackageOutputPath></PackageOutputPath>
-    <PackageTags>Bonsai; Rx; SpikeGLX; Reactive; Extensions; Neuroscience; Electrophysiology; Neuropixels</PackageTags>
+    <Description>Bonsai package for interfacing with SpikeGLX.</Description>
     <TargetFramework>net472</TargetFramework>
-    <Features>strict</Features>
-    <Version>0.2.0-alpha</Version>
-	<LangVersion>preview</LangVersion>
-	<PlatformTarget>x64</PlatformTarget>
-	<PackageReadmeFile>README.md</PackageReadmeFile>
-	<RepositoryUrl>https://github.com/FeeLab/Bonsai.SpikeGLX</RepositoryUrl>
-	<RepositoryType>git</RepositoryType>
-	<PackageReleaseNotes>Initial Release</PackageReleaseNotes>
-	<PackageLicenseFile>LICENSE</PackageLicenseFile>
-	<ApplicationIcon>Images\Bonsai.SpikeGLX.ico</ApplicationIcon>
-	<AllowUnsafeBlocks>False</AllowUnsafeBlocks>
-	<EnableNETAnalyzers>False</EnableNETAnalyzers>
-	<AnalysisLevel>none</AnalysisLevel>
-	<Platforms>AnyCPU</Platforms>
-	<NoWin32Manifest>true</NoWin32Manifest>
-	<Configurations>Debug;Release</Configurations>
-	<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
   </PropertyGroup>
 
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <Optimize>False</Optimize>
-  </PropertyGroup>
-	<ItemGroup>
-    <Compile Include="$(ProjectDir)..\..\modules\SpikeGLX-CPP-SDK\C#\C_Sglx.cs" Link="C_Sglx.cs" />
-  </ItemGroup>
-
   <ItemGroup>
-    <Content Include="Images\Bonsai.SpikeGLX.ico" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Include="$(ProjectDir)..\..\LICENSE">
-      <Pack>True</Pack>
-      <PackagePath>\</PackagePath>
-    </None>
-    <None Include="$(ProjectDir)..\..\README.md">
-      <Pack>True</Pack>
-      <PackagePath>\</PackagePath>
-    </None>
+    <Content Include="..\Externals\SpikeGLX-CPP-SDK\API\*.dll" PackagePath="runtimes\win-x64\native">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
 
   <ItemGroup>
@@ -58,20 +18,32 @@
     <PackageReference Include="PrecisionTimer.NET" Version="2.4.0.3" />
   </ItemGroup>
 
+  <UsingTask TaskName="InternalizeSglxApi" TaskFactory="RoslynCodeTaskFactory" AssemblyFile="$(MSBuildToolsPath)\Microsoft.Build.Tasks.Core.dll">
+    <ParameterGroup>
+      <SourceFilename ParameterType="System.String" Required="true" />
+    </ParameterGroup>
+    <Task>
+      <Using Namespace="System" />
+      <Using Namespace="System.IO" />
+      <Using Namespace="System.Text.RegularExpressions" />
+      <Code Type="Fragment" Language="cs">
+        <![CDATA[
+            File.WriteAllText(SourceFilename, File.ReadAllText(SourceFilename).Replace("public class C_Sglx", "internal class C_Sglx"));
+          ]]>
+      </Code>
+    </Task>
+  </UsingTask>
 
-	<ItemGroup>
-		<None Include="$(ProjectDir)..\..\modules\SpikeGLX-CPP-SDK\API\*.dll" Pack="true" PackagePath="runtimes\win-x64\native" />
-	</ItemGroup>
-
-	<Target Name="PostBuild" AfterTargets="PostBuildEvent">
-		<Exec Command="xcopy /d /y &quot;$(ProjectDir)..\..\modules\SpikeGLX-CPP-SDK\API\*.dll&quot; &quot;$(TargetDir)&quot;" />
-	</Target>
-
-	<ItemGroup>
-    <None Include="Images\Bonsai.SpikeGLX.Logo.png">
-      <Pack>True</Pack>
-      <PackagePath>\</PackagePath>
-    </None>
-  </ItemGroup>
+  <Target Name="CopySglxSourceFiles" BeforeTargets="BeforeBuild">
+    <PropertyGroup>
+      <SglxSourceFileName>C_Sglx.cs</SglxSourceFileName>
+    </PropertyGroup>
+    <ItemGroup>
+      <SglxSourceFiles Include="..\Externals\SpikeGLX-CPP-SDK\C#\$(SglxSourceFileName)" />
+      <Compile Include="$(SglxSourceFileName)" Condition="!Exists($(SglxSourceFileName))" />
+    </ItemGroup>
+    <Copy SourceFiles="@(SglxSourceFiles)" DestinationFolder="$(MSBuildThisFileDirectory)" />
+    <InternalizeSglxApi SourceFileName="$(SglxSourceFileName)" />
+  </Target>
 
 </Project>

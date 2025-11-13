@@ -1,3 +1,6 @@
-[submodule "modules/SpikeGLX-CPP-SDK"]
-	path = modules/SpikeGLX-CPP-SDK
+[submodule "src/Externals/SpikeGLX-CPP-SDK"]
+	path = src/Externals/SpikeGLX-CPP-SDK
 	url = https://github.com/billkarsh/SpikeGLX-CPP-SDK.git
+[submodule "docs/bonsai-docfx"]
+	path = docs/bonsai-docfx
+	url = https://github.com/bonsai-rx/docfx-tools
