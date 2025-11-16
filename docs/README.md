@@ -15,6 +15,3 @@ Use is subject to [MIT](https://opensource.org/license/mit/) license terms.
 
 SpikeGLX-CPP-SDK components are subject to [Janelia Research Campus Software Copyright 1.2 license](http://license.janelia.org/license) terms.
 
-## Acknowledgments
-The SpikeStream marble is inspired by the AudioCapture marble in [Bonsai.Audio](https://github.com/bonsai-rx/bonsai/tree/main/Bonsai.Audio).
-

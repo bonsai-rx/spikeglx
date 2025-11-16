@@ -1,13 +1,7 @@
 # Getting Started
-<<<<<<< HEAD
-**Bonsai.SpikeGLX** is a [Bonsai](https://bonsai-rx.org/) package for interfacing with the [SpikeGLX](https://billkarsh.github.io/SpikeGLX/) recording software for [Neuropixels](https://www.neuropixels.org/). It is designed to supplement the core functionalities of SpikeGLX (*i.e.*, visualizing and saving data) and faciliate more complex experimental paradigms (*e.g.*, closed-loop neurofeedback, brain-computer interfaces, etc.). 
-**Bonsai.SpikeGLX** provides three ways of interacting with an ongoing SpikeGLX run:
-- streaming data from SpikeGLX into Bonsai with [`Fetch`];
-=======
-`Bonsai.SpikeGLX` is a [Bonsai](https://bonsai-rx.org/) package for interfacing with the [SpikeGLX](https://billkarsh.github.io/SpikeGLX/) recording software for [Neuropixels](https://www.neuropixels.org/). It is designed to supplement the core functionalities of SpikeGLX (*i.e.*, visualizing and saving data) and faciliate more complex experimental paradigms (*e.g.*, closed-loop neurofeedback, brain-computer interfaces, etc.). 
+`Bonsai.SpikeGLX` is a [Bonsai](https://bonsai-rx.org/) package for interfacing with the [SpikeGLX](https://billkarsh.github.io/SpikeGLX/) recording software for [Neuropixels](https://www.neuropixels.org/). It is designed to supplement the core functionalities of SpikeGLX (*i.e.*, visualizing and saving data) and faciliate more complex experimental paradigms (*e.g.*, closed-loop neurofeedback, brain-computer interfaces, *etc.*). 
 `Bonsai.SpikeGLX` provides three ways of interacting with an ongoing SpikeGLX run:
-- streaming data from SpikeGLX into Bonsai with [`SpikeGLXInput`];
->>>>>>> 362c9d7 (Use backticks (`) to highlight all package names.)
+- streaming data from SpikeGLX into Bonsai with [`Fetch`];
 - controlling SpikeGLX digital output lines with [`DigitalOutput`]; and
 - starting and stopping recordings with [`Trigger`].
 
@@ -24,7 +18,7 @@ A brief summary of the functionality of each of these operators is provided here
 ## Save Data
 SpikeGLX is expressly designed for saving Neuropixels data. As a result, it is recommended to use SpikeGLX's built-in capabilities to save your data; however, `Bonsai.SpikeGLX` provides ways to control which parts of a run SpikeGLX should save. If a SpikeGLX run is configured to use "remote controlled start and stop" triggering, [`Trigger`] may be used to set gate and trigger values. 
 
-[!include[Trigger](~/articles/spikeglx-trigger)]
+[!include[Trigger](~/articles/spikeglx-trigger.md)]
 
 > [!NOTE]
 > SpikeGLX also provides the ability to trigger recordings using a TTL line. In some cases, this may be preferred over using [`Trigger`].
