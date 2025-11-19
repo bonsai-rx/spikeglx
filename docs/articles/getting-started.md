@@ -1,15 +1,19 @@
 # Getting Started
-`Bonsai.SpikeGLX` is a [Bonsai](https://bonsai-rx.org/) package for interfacing with the [SpikeGLX](https://billkarsh.github.io/SpikeGLX/) recording software for [Neuropixels](https://www.neuropixels.org/). It is designed to supplement the core functionalities of SpikeGLX (*i.e.*, visualizing and saving data) and faciliate more complex experimental paradigms (*e.g.*, closed-loop neurofeedback, brain-computer interfaces, *etc.*). 
+`Bonsai.SpikeGLX` is a [Bonsai](https://bonsai-rx.org/) package for interfacing with the [SpikeGLX](https://billkarsh.github.io/SpikeGLX/) recording software for [Neuropixels](https://www.neuropixels.org/).
+
+It is designed to supplement the core functionalities of SpikeGLX (*i.e.*, visualizing and saving data) and facilitate more complex experimental paradigms (*e.g.*, closed-loop neurofeedback, brain-computer interfaces, *etc.*). 
+
 `Bonsai.SpikeGLX` provides three ways of interacting with an ongoing SpikeGLX run:
 - streaming data from SpikeGLX into Bonsai with [`Fetch`];
 - controlling SpikeGLX digital output lines with [`DigitalOutput`]; and
 - starting and stopping recordings with [`Trigger`].
 
 A brief summary of the functionality of each of these operators is provided here. A more detailed description of each may be found on the associated Reference page.
+
 > [!NOTE]
 > All `Bonsai.SpikeGLX` operators require SpikeGLX's remote command server to be running. A full description of how to do this can be found in the [SpikeGLX User Manual](https://billkarsh.github.io/SpikeGLX/Sgl_help/UserManual.html#remote-command-servers). Make sure to note the `Host` (IP Address) and `Port` the command server is listening on. These are properties that must be set for each `Bonsai.SpikeGLX` operator.
 
-## Stream Data from SpikeGLX into Bonsai
+## Stream Data from SpikeGLX
 [!include[Fetch](~/articles/spikeglx-fetch.md)]
 
 ## Control Digital Outputs
