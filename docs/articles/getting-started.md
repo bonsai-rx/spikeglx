@@ -6,7 +6,7 @@ It is designed to supplement the core functionalities of SpikeGLX (*i.e.*, visua
 `Bonsai.SpikeGLX` provides three ways of interacting with an ongoing SpikeGLX run:
 - streaming data from SpikeGLX into Bonsai with [`Fetch`];
 - controlling SpikeGLX digital output lines with [`DigitalOutput`]; and
-- starting and stopping recordings with [`Trigger`].
+- starting and stopping recordings with [`TriggerGT`].
 
 A brief summary of the functionality of each of these operators is provided here. A more detailed description of each may be found on the associated Reference page.
 
@@ -20,18 +20,18 @@ A brief summary of the functionality of each of these operators is provided here
 [!include[DigitalOutput](~/articles/spikeglx-digitaloutput.md)]
 
 ## Save Data
-SpikeGLX is expressly designed for saving Neuropixels data. As a result, it is recommended to use SpikeGLX's built-in capabilities to save your data; however, `Bonsai.SpikeGLX` provides ways to control which parts of a run SpikeGLX should save. If a SpikeGLX run is configured to use "remote controlled start and stop" triggering, [`Trigger`] may be used to set gate and trigger values. 
+SpikeGLX is expressly designed for saving Neuropixels data. As a result, it is recommended to use SpikeGLX's built-in capabilities to save your data; however, `Bonsai.SpikeGLX` provides ways to control which parts of a run SpikeGLX should save. If a SpikeGLX run is configured to use "remote controlled start and stop" triggering, [`TriggerGT`] may be used to set gate and trigger values. 
 
-[!include[Trigger](~/articles/spikeglx-trigger.md)]
+[!include[TriggerGT](~/articles/spikeglx-triggerGT.md)]
 
 > [!NOTE]
-> SpikeGLX also provides the ability to trigger recordings using a TTL line. In some cases, this may be preferred over using [`Trigger`].
+> SpikeGLX also provides the ability to trigger recordings using a TTL line. In some cases, this may be preferred over using [`TriggerGT`].
 
 If you do wish to save data you have streamed into Bonsai using [`Fetch`], you can use the [`MatrixWriter`] operator from the `Bonsai.Dsp` package. 
 
 <!--Reference Style Links -->
 [`Fetch`]: xref:Bonsai.SpikeGLX.Fetch
 [`DigitalOutput`]: xref:Bonsai.SpikeGLX.DigitalOutput
-[`Trigger`]: xref:Bonsai.SpikeGLX.Trigger
+[`TriggerGT`]: xref:Bonsai.SpikeGLX.TriggerGT
 [`Timer`]: xref:Bonsai.Reactive.Timer
 [`MatrixWriter`]: xref:Bonsai.Dsp.MatrixWriter
