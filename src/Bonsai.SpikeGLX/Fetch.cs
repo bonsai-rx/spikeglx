@@ -17,14 +17,9 @@ namespace Bonsai.SpikeGLX
     public class Fetch : Source<Mat>
     {
         /// <summary>
-        /// Gets or sets the duration of fetched data buffers, in ms. 
-        /// </summary>
-        [Description("Duration of streamed data buffers, in ms.")]
-        public int BufferLength { get; set; } = 1000;
-
-        /// <summary>
         /// Gets or sets the IP address of the SpikeGLX command server
         /// </summary>
+        [Category("Command Server")]
         [Description("IP address of the SpikeGLX command server." +
             "\"localhost\" evaluates to 127.0.0.1.")]
         public string Host { get; set; } = "localhost";
@@ -32,8 +27,15 @@ namespace Bonsai.SpikeGLX
         /// <summary>
         /// Gets or sets the port of the SpikeGLX command server.
         /// </summary>
+        [Category("Command Server")]
         [Description("Port of the SpikeGLX command server.")]
         public int Port { get; set; } = 4142;
+
+        /// <summary>
+        /// Gets or sets the duration of fetched data buffers, in ms. 
+        /// </summary>
+        [Description("Duration of streamed data buffers, in ms.")]
+        public int BufferLength { get; set; } = 1000;
 
         /// <summary>
         /// Gets or sets the stream type (0: NIDAQ, 1: Onebox, 2: IMEC Probe).
