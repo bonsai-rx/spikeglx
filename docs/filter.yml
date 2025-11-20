@@ -2,3 +2,4 @@ apiRules:
 - exclude:
     hasAttribute:
       uid: System.ObsoleteAttribute
+      

@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<WorkflowBuilder Version="2.8.2"
+                 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                 xmlns:rx="clr-namespace:Bonsai.Reactive;assembly=Bonsai.Core"
+                 xmlns:glx="clr-namespace:Bonsai.SpikeGLX;assembly=Bonsai.SpikeGLX"
+                 xmlns="https://bonsai-rx.org/2018/workflow">
+  <Workflow>
+    <Nodes>
+      <Expression xsi:type="Combinator">
+        <Combinator xsi:type="rx:Timer">
+          <rx:DueTime>PT0S</rx:DueTime>
+          <rx:Period>PT5S</rx:Period>
+        </Combinator>
+      </Expression>
+      <Expression xsi:type="Combinator">
+        <Combinator xsi:type="glx:Fetch">
+          <glx:BufferLength>1000</glx:BufferLength>
+          <glx:Host>localhost</glx:Host>
+          <glx:Port>4142</glx:Port>
+          <glx:StreamType>0</glx:StreamType>
+          <glx:Substream>0</glx:Substream>
+          <glx:Channels>
+            <glx:int>0</glx:int>
+          </glx:Channels>
+          <glx:Downsample>1</glx:Downsample>
+          <glx:ConvertToVoltage>false</glx:ConvertToVoltage>
+          <glx:HighResolutionTimer>false</glx:HighResolutionTimer>
+        </Combinator>
+      </Expression>
+    </Nodes>
+    <Edges>
+      <Edge From="0" To="1" Label="Source1" />
+    </Edges>
+  </Workflow>
+</WorkflowBuilder>
