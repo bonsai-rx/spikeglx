@@ -247,17 +247,18 @@ namespace Bonsai.SpikeGLX
         }
 
         /// <summary>
-        /// Set a digital output through SpikeGLX.
+        /// Set one or more NI digital lines through SpikeGLX.
         /// </summary>
-        /// <param name="output">The digital output value to set</param>
         /// <param name="channels">
         /// The output channels to set the value of. Channel strings have form:
         /// "Dev6/port0/line2,Dev6/port0/line5".
         /// </param>
+        /// <param name="bits">The bit mask of values to set. Each bit maps to a line.
+        /// </param>
         /// <exception cref="SpikeGLXException"></exception>
-        public void SetDigitalOut(int output, string channels)
+        public void SetNIDigitalOut(string channels, uint bits)
         {
-            int ok = C_Sglx.c_sglx_setDigitalOut(hSglx, output, channels);
+            int ok = C_Sglx.c_sglx_ni_DO_set(hSglx, channels, bits);
             if (ok == 0) throw new SpikeGLXException(hSglx);
         }
 

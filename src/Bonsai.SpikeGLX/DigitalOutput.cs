@@ -38,6 +38,26 @@ namespace Bonsai.SpikeGLX
 
         /// <summary>
         /// Sets one or more digital output lines through SpikeGLX from an observable sequence
+        /// of boolean values representing a digital state.
+        /// </summary>
+        /// <param name="source">
+        /// A sequence of boolean values, where each value represents a high (<see langword="true"/>)
+        /// or low (<see langword="false"/>) state to which to set the digital output line.
+        /// </param>
+        /// <returns>
+        /// An observable sequence that is identical to the <paramref name="source"/> sequence
+        /// but where there is an additional side effect of setting digital output lines through
+        /// SpikeGLX.
+        /// </returns>
+        public IObservable<bool> Process(IObservable<bool> source)
+        {
+            return Observable.Using(() => new SpikeGLX(Host, Port),
+                connection => source.Do(input => connection.SetNIDigitalOut(Channels,
+                input ? uint.MaxValue : uint.MinValue)));
+        }
+
+        /// <summary>
+        /// Sets one or more digital output lines through SpikeGLX from an observable sequence
         /// of integer values representing a digital state.
         /// </summary>
         /// <param name="source">
@@ -52,25 +72,8 @@ namespace Bonsai.SpikeGLX
         public IObservable<int> Process(IObservable<int> source)
         {
             return Observable.Using(() => new SpikeGLX(Host, Port),
-                connection => source.Do(input => connection.SetDigitalOut(input, Channels)));
-        }
-
-        /// <summary>
-        /// Sets one or more digital output lines through SpikeGLX from an observable sequence
-        /// of boolean values representing a digital state.
-        /// </summary>
-        /// <param name="source">
-        /// A sequence of boolean values, where each value represents a high (<see langword="true"/>)
-        /// or low (<see langword="false"/>) state to which to set the digital output line.
-        /// </param>
-        /// <returns>
-        /// An observable sequence that is identical to the <paramref name="source"/> sequence
-        /// but where there is an additional side effect of setting digital output lines through
-        /// SpikeGLX.
-        /// </returns>
-        public IObservable<int> Process(IObservable<bool> source)
-        {
-            return Process(source.Select(input => input ? 1 : 0));
+                connection => source.Do(input => connection.SetNIDigitalOut(Channels,
+                input != 0 ? uint.MaxValue : uint.MinValue)));
         }
     }
 }

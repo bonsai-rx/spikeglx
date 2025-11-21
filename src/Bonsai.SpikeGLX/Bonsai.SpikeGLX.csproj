@@ -39,7 +39,7 @@
       <SglxSourceFileName>C_Sglx.cs</SglxSourceFileName>
     </PropertyGroup>
     <ItemGroup>
-      <SglxSourceFiles Include="..\Externals\SpikeGLX-CPP-SDK\C#\$(SglxSourceFileName)" />
+      <SglxSourceFiles Include="..\Externals\SpikeGLX-CPP-SDK\Windows\C#\$(SglxSourceFileName)" />
       <Compile Include="$(SglxSourceFileName)" Condition="!Exists($(SglxSourceFileName))" />
     </ItemGroup>
     <Copy SourceFiles="@(SglxSourceFiles)" DestinationFolder="$(MSBuildThisFileDirectory)" />
