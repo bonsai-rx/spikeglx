@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel;
+using System.Reactive;
 using System.Reactive.Linq;
 
 namespace Bonsai.SpikeGLX
@@ -13,7 +14,7 @@ namespace Bonsai.SpikeGLX
     /// </remarks>
     [Combinator]
     [Description("Controls SpikeGLX file writing by setting the gate and trigger levels whenever the source sequence emits a notification.")]
-    [WorkflowElementCategory(ElementCategory.Sink)]
+    [WorkflowElementCategory(ElementCategory.Combinator)]
     public class TriggerGT
     {
         /// <summary>
@@ -41,6 +42,19 @@ namespace Bonsai.SpikeGLX
         /// </summary>
         [Description("The level at which to set the trigger.")]
         public TriggerGTLevel Trigger { get; set; }
+
+        /// <summary>
+        /// Sets the gate and trigger values in SpikeGLX and returns an observable
+        /// sequence with a single notification once the levels have been set.
+        /// </summary>
+        /// <returns>
+        /// A sequence with a single <see cref="Unit"/> value emitted once the
+        /// gate and trigger levels have been set in SpikeGLX.
+        /// </returns>
+        public IObservable<Unit> Process()
+        {
+            return Process(Observable.Return(Unit.Default));
+        }
 
         /// <summary>
         /// Sets the gate and trigger values in SpikeGLX, whenever an observable sequence
