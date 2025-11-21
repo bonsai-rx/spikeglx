@@ -11,9 +11,9 @@ namespace Bonsai.SpikeGLX
     /// <summary>
     /// Represents an operator that generates a sequence of data buffers from a SpikeGLX data stream.
     /// </summary>
-    [Description("Streams buffers of data from a SpikeGLX data stream.")]
     [Combinator(MethodName = nameof(Generate))]
     [WorkflowElementCategory(ElementCategory.Source)]
+    [Description("Streams buffers of data from a SpikeGLX data stream.")]
     public class Fetch : Source<Mat>
     {
         /// <summary>

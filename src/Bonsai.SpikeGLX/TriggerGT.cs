@@ -13,8 +13,8 @@ namespace Bonsai.SpikeGLX
     /// Gate and/or trigger must be set to "Remote Controlled Start and Stop" in SpikeGLX.
     /// </remarks>
     [Combinator]
-    [Description("Controls SpikeGLX file writing by setting the gate and trigger levels whenever the source sequence emits a notification.")]
     [WorkflowElementCategory(ElementCategory.Combinator)]
+    [Description("Controls SpikeGLX file writing by setting the gate and trigger levels whenever the source sequence emits a notification.")]
     public class TriggerGT
     {
         /// <summary>

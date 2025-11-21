@@ -9,8 +9,8 @@ namespace Bonsai.SpikeGLX
     /// a sequence of values representing the state of the line.
     /// </summary>
     [Combinator]
-    [Description("Sets one or more digital output lines through SpikeGLX from a sequence of values representing the state of the line.")]
     [WorkflowElementCategory(ElementCategory.Sink)]
+    [Description("Sets one or more digital output lines through SpikeGLX from a sequence of values representing the state of the line.")]
     public class DigitalOutput
     {
         /// <summary>
