@@ -7,10 +7,10 @@
     <Nodes>
       <Expression xsi:type="Combinator">
         <Combinator xsi:type="glx:Fetch">
-          <glx:BufferLength>1000</glx:BufferLength>
           <glx:Host>localhost</glx:Host>
           <glx:Port>4142</glx:Port>
-          <glx:StreamType>0</glx:StreamType>
+          <glx:BufferLength>1000</glx:BufferLength>
+          <glx:StreamType>Daq</glx:StreamType>
           <glx:Substream>0</glx:Substream>
           <glx:Channels>
             <glx:int>0</glx:int>
