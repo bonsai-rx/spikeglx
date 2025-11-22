@@ -38,9 +38,9 @@ namespace Bonsai.SpikeGLX
         public int BufferLength { get; set; } = 1000;
 
         /// <summary>
-        /// Gets or sets the stream type (0: Daq, 1: Onebox, 2: Probe).
+        /// Gets or sets a value specifying the type of stream to fetch from.
         /// </summary>
-        [Description("Stream type (0: Daq, 1: Onebox, 2: Probe).")]
+        [Description("The type of stream to fetch from.")]
         public StreamType StreamType { get; set; } = StreamType.Daq;
 
         /// <summary>
@@ -177,22 +177,22 @@ namespace Bonsai.SpikeGLX
     }
 
     /// <summary>
-    /// Specifies possible values for the SpikeGLX stream
+    /// Specifies possible values for the SpikeGLX stream.
     /// </summary>
     public enum StreamType
     {
         /// <summary>
-        /// NIDAQ.
+        /// NIDAQ
         /// </summary>
         Daq = 0,
 
         /// <summary>
-        /// Onebox.
+        /// Onebox
         /// </summary>
         OneBox = 1,
 
         /// <summary>
-        /// IMEC probe.
+        /// IMEC probe
         /// </summary>
         Probe = 2
     }
