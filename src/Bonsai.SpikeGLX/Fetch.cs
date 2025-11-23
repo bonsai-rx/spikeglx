@@ -38,10 +38,10 @@ namespace Bonsai.SpikeGLX
         public int BufferLength { get; set; } = 1000;
 
         /// <summary>
-        /// Gets or sets the stream type (0: NIDAQ, 1: Onebox, 2: IMEC Probe).
+        /// Gets or sets a value specifying the type of stream to fetch from.
         /// </summary>
-        [Description("Stream type (0: NIDAQ, 1: Onebox, 2: IMEC Probe).")]
-        public int StreamType { get; set; } = 0;
+        [Description("The type of stream to fetch from.")]
+        public StreamType StreamType { get; set; } = StreamType.Daq;
 
         /// <summary>
         /// Gets or sets the substream (0 for NIDAQ, probe number for IMEC Probe).
@@ -98,7 +98,7 @@ namespace Bonsai.SpikeGLX
                 return Task.Factory.StartNew(() =>
                 {
                     // Establish connection to SpikeGLX command server.
-                    using SpikeGLXDataStream connection = new(Host, Port, StreamType, Substream, Channels);
+                    using SpikeGLXDataStream connection = new(Host, Port, (int)StreamType, Substream, Channels);
 
                     // Get the sample rate of the stream and use it to convert the buffer length,
                     // in ms, to a buffer size, in number of elements.
@@ -158,7 +158,7 @@ namespace Bonsai.SpikeGLX
         {
             // Create a disposable data stream connection using the provided host, port, stream type, substream, and channels.
             return Observable
-                .Using<Mat, SpikeGLXDataStream>(() => new SpikeGLXDataStream(Host, Port, StreamType, Substream, Channels),
+                .Using<Mat, SpikeGLXDataStream>(() => new SpikeGLXDataStream(Host, Port, (int)StreamType, Substream, Channels),
                     // Use the data stream connection to fetch the latest data for each input notification.
                     connection => source
                         .Select(input =>
@@ -174,5 +174,26 @@ namespace Bonsai.SpikeGLX
                 // Reference count the observable sequence to manage its lifetime.
                 .RefCount();
         }
+    }
+
+    /// <summary>
+    /// Specifies possible values for the SpikeGLX stream.
+    /// </summary>
+    public enum StreamType
+    {
+        /// <summary>
+        /// NIDAQ
+        /// </summary>
+        Daq = 0,
+
+        /// <summary>
+        /// Onebox
+        /// </summary>
+        OneBox = 1,
+
+        /// <summary>
+        /// IMEC probe
+        /// </summary>
+        Probe = 2
     }
 }
