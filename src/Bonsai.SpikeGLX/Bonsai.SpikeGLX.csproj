@@ -7,7 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Content Include="..\Externals\SpikeGLX-CPP-SDK\API\*.dll" PackagePath="runtimes\win-x64\native">
+    <Content Include="..\Externals\SpikeGLX-CPP-SDK\Windows\API\*.dll" PackagePath="runtimes\win-x64\native">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
