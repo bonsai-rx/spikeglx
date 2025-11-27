@@ -55,7 +55,7 @@ namespace Bonsai.SpikeGLX
         /// SpikeGLX.
         /// </returns>
         /// <remarks>
-        /// The lowest 8 bits of the bitmask map to port0, the next higher 8 bits to port 1, etc.
+        /// The lowest 8 bits of the bitmask map to port0, the next higher 8 bits to port1, etc.
         /// This mapping is fixed, irrespective of whether only a subset of lines have been
         /// selected in <see cref="Channels"/>. The effect of selecting a subset of lines
         /// in <see cref="Channels"/> is to ignore those bits in the bitmask corresponding
@@ -64,8 +64,11 @@ namespace Bonsai.SpikeGLX
         public IObservable<uint> Process(IObservable<uint> source)
         {
             return Observable.Using(() => new SpikeGLX(Host, Port),
-                connection => source.Do(input => connection.SetNIDigitalOut(Channels,
-                input)));
+                connection =>
+                {
+                    var channels = Channels;
+                    return source.Do(input => connection.SetNIDigitalOut(channels, input));
+                });
         }
 
         /// <summary>
