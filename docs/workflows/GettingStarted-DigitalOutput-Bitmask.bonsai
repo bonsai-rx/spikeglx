@@ -15,14 +15,14 @@
       </Expression>
       <Expression xsi:type="Mod">
         <Operand xsi:type="WorkflowProperty" TypeArguments="sys:Int64">
-          <Value>2</Value>
+          <Value>4</Value>
         </Operand>
       </Expression>
       <Expression xsi:type="Combinator">
         <Combinator xsi:type="glx:DigitalOutput">
           <glx:Host>localhost</glx:Host>
           <glx:Port>4142</glx:Port>
-          <glx:Channels>Dev6/port0/line2</glx:Channels>
+          <glx:Channels>Dev6/port0/line0:1</glx:Channels>
         </Combinator>
       </Expression>
     </Nodes>
