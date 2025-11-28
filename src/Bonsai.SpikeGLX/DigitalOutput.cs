@@ -87,8 +87,11 @@ namespace Bonsai.SpikeGLX
         public IObservable<bool> Process(IObservable<bool> source)
         {
             return Observable.Using(() => new SpikeGLX(Host, Port),
-                connection => source.Do(input => connection.SetNIDigitalOut(Channels,
-                input ? uint.MaxValue : uint.MinValue)));
+                connection =>
+                {
+                    var channels = Channels;
+                    return source.Do(input => connection.SetNIDigitalOut(channels, input ? uint.MaxValue : uint.MinValue));
+                });
         }
     }
 }
