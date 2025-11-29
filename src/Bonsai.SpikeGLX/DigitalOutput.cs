@@ -33,9 +33,9 @@ namespace Bonsai.SpikeGLX
         /// <remarks>
         /// Only lines from a single device should be listed. Valid formats include:
         /// <list type="bullet">
-        /// <item>\"Dev6/port0/line2,Dev6/port0/line5\"</item>
-        /// <item>\"Dev6/port1/line0:3\"</item>
-        /// <item>\"Dev6/port1:2\"</item>
+        /// <item><c>Dev6/port0/line2,Dev6/port0/line5</c></item>
+        /// <item><c>Dev6/port1/line0:3</c></item>
+        /// <item><c>Dev6/port1:2</c></item>
         /// </list>
         /// </remarks>
         [Description("The name of the channels to output the digital signal to.")]
